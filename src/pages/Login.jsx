@@ -4,6 +4,8 @@ import { authApi } from "../../services/salonApi";
 import { saveSession } from "../../services/sessionStore";
 import { useUser } from "../context/UserContext";
 import { Field } from "../components/Field";
+import { Button } from "../components/ui/Button";
+import { Text } from "../components/ui/Text";
 
 export function Login() {
   const { user, setUser } = useUser();
@@ -78,15 +80,17 @@ export function Login() {
       </div>
       <div className="login-form-side">
         <form className="login-card" onSubmit={submit}>
-          <span className="login-kicker">
+          <Text as="span" className="login-kicker">
             {register ? "JOIN YOUR WORKSPACE" : "WELCOME BACK"}
-          </span>
-          <h2>{register ? "Create your account" : "Sign in to Glow"}</h2>
-          <p className="muted">
+          </Text>
+          <Text as="h2">
+            {register ? "Create your account" : "Sign in to Glow"}
+          </Text>
+          <Text as="p" className="muted">
             {register
               ? "Register a staff account to get started."
               : "Enter your details to access your salon dashboard."}
-          </p>
+          </Text>
           {register && (
             <Field
               label="Full name"
@@ -130,8 +134,9 @@ export function Login() {
               {retryAfter > 0 && ` Retry in ${retryTime}.`}
             </div>
           )}
-          <button
-            className="btn btn-primary btn-wide"
+          <Button
+            size="wide"
+            type="submit"
             disabled={busy || retryAfter > 0}
           >
             {busy
@@ -141,12 +146,11 @@ export function Login() {
                 : register
                   ? "Create account →"
                   : "Sign in →"}
-          </button>
-          <p className="switch-auth">
+          </Button>
+          <Text as="p" className="switch-auth">
             {register ? "Already have an account?" : "New to this workspace?"}{" "}
-            <button
-              type="button"
-              className="text-btn"
+            <Button
+              variant="text"
               disabled={retryAfter > 0}
               onClick={() => {
                 setRegister(!register);
@@ -155,11 +159,11 @@ export function Login() {
             >
               {" "}
               {register ? "Sign in" : "Create staff account"}
-            </button>
-          </p>
-          <p className="login-note">
+            </Button>
+          </Text>
+          <Text as="p" className="login-note">
             Admin access is assigned by an existing administrator.
-          </p>
+          </Text>
         </form>
       </div>
     </div>

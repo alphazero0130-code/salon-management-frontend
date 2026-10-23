@@ -1,0 +1,15 @@
+export const Colors = {
+  ink: "var(--color-ink)",
+  muted: "var(--color-muted)",
+  line: "var(--color-line)",
+  primary: "var(--color-primary)",
+  primaryHover: "var(--color-primary-hover)",
+  surface: "var(--color-surface)",
+  canvas: "var(--color-canvas)",
+  success: "var(--color-success)",
+  danger: "var(--color-danger)",
+  controlBorder: "var(--color-control-border)",
+  focus: "var(--color-focus)",
+  secondaryBackground: "var(--color-secondary-background)",
+  secondaryForeground: "var(--color-secondary-foreground)",
+};

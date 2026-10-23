@@ -6,6 +6,8 @@ import { PAGE_SIZE } from "../../services/apiConfig";
 import { getList, money } from "../utils";
 import { AppointmentTable } from "../components/AppointmentTable";
 import { PageState } from "../components/PageState";
+import { Button } from "../components/ui/Button";
+import { Text } from "../components/ui/Text";
 
 export function Dashboard() {
   const [stats, setStats] = useState(null),
@@ -72,16 +74,18 @@ export function Dashboard() {
       {error && (
         <div className="notice error">
           {error}{" "}
-          <button className="text-btn" onClick={load}>
+          <Button variant="text" onClick={load}>
             Retry
-          </button>
+          </Button>
         </div>
       )}
       <div className="welcome-banner">
         <div className="banner-copy">
           <span className="banner-tag">SALON OPERATIONS / TODAY</span>
-          <h2>Your salon, at a glance.</h2>
-          <p>Keep today’s appointments, services and team running smoothly.</p>
+          <Text as="h2">Your salon, at a glance.</Text>
+          <Text as="p">
+            Keep today’s appointments, services and team running smoothly.
+          </Text>
           <NavLink className="banner-action" to="/appointments">
             Open appointment book <span aria-hidden="true">→</span>
           </NavLink>

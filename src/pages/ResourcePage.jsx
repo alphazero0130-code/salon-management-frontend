@@ -11,6 +11,9 @@ import { EmptyState } from "../components/EmptyState";
 import { StatusBadge } from "../components/StatusBadge";
 import { PersonCell } from "../components/PersonCell";
 import { Pagination } from "../components/Pagination";
+import { Button } from "../components/ui/Button";
+import { Text } from "../components/ui/Text";
+import { TextField } from "../components/ui/TextField";
 
 export function ResourcePage({ kind }) {
   const config = {
@@ -150,8 +153,8 @@ export function ResourcePage({ kind }) {
     <>
       <div className="toolbar">
         <div className="search-box">
-          <span>⌕</span>
-          <input
+          <Text as="span">⌕</Text>
+          <TextField
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
@@ -160,18 +163,18 @@ export function ResourcePage({ kind }) {
             placeholder={`Search ${config.title.toLowerCase()}…`}
           />
         </div>
-        <span className="result-count">
+        <Text as="span" className="result-count">
           {pagination?.total ?? rows.length} records
-        </span>
+        </Text>
         {canMutate && (
-          <button className="btn btn-primary" onClick={() => open()}>
+          <Button onClick={() => open()}>
             ＋ Add{" "}
             {kind === "staff"
               ? "team member"
               : kind === "services"
                 ? "service"
                 : "customer"}
-          </button>
+          </Button>
         )}
       </div>
       {toast && <div className="notice success">{toast}</div>}
@@ -222,20 +225,20 @@ export function ResourcePage({ kind }) {
                     {canMutate && (
                       <td>
                         <div className="row-actions">
-                          <button
-                            className="icon-btn"
+                          <Button
+                            variant="icon"
                             title="Edit"
                             onClick={() => open(row)}
                           >
                             ✎
-                          </button>
-                          <button
-                            className="icon-btn danger-text"
+                          </Button>
+                          <Button
+                            variant="danger"
                             title="Delete"
                             onClick={() => remove(row)}
                           >
                             ⌫
-                          </button>
+                          </Button>
                         </div>
                       </td>
                     )}
@@ -295,16 +298,16 @@ export function ResourcePage({ kind }) {
               )}
             </div>
             <div className="modal-actions">
-              <button
+              <Button
+                variant="secondary"
                 type="button"
-                className="btn btn-light"
                 onClick={() => setModal(false)}
               >
                 Cancel
-              </button>
-              <button className="btn btn-primary" disabled={busy}>
+              </Button>
+              <Button type="submit" disabled={busy}>
                 {busy ? "Saving…" : editing ? "Save changes" : "Create record"}
-              </button>
+              </Button>
             </div>
         </Modal>
       )}

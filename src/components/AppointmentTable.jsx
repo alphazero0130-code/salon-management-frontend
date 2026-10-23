@@ -2,6 +2,7 @@ import { dateTime } from "../utils";
 import { EmptyState } from "./EmptyState";
 import { PersonCell } from "./PersonCell";
 import { StatusBadge } from "./StatusBadge";
+import { SelectField } from "./ui/SelectField";
 
 export function AppointmentTable({ appointments, onStatus }) {
   if (!appointments?.length)
@@ -40,7 +41,7 @@ export function AppointmentTable({ appointments, onStatus }) {
               </td>
               {onStatus && (
                 <td>
-                  <select
+                  <SelectField
                     className="mini-select"
                     value={a.status}
                     onChange={(e) => onStatus(a._id, e.target.value)}
@@ -49,7 +50,7 @@ export function AppointmentTable({ appointments, onStatus }) {
                     <option value="booked">Booked</option>
                     <option value="completed">Completed</option>
                     <option value="cancelled">Cancelled</option>
-                  </select>
+                  </SelectField>
                 </td>
               )}
             </tr>

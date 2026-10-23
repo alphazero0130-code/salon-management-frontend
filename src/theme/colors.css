@@ -1,0 +1,16 @@
+:root {
+  --color-ink: #292333;
+  --color-muted: #888392;
+  --color-line: #e3e8ec;
+  --color-primary: #167c72;
+  --color-primary-hover: #116b62;
+  --color-surface: #fff;
+  --color-canvas: #f8f7fa;
+  --color-success: #39765e;
+  --color-danger: #c55b5b;
+  --color-control-border: #dce3e7;
+  --color-focus: #5caaa0;
+  --color-focus-ring: #1482761a;
+  --color-secondary-background: #edf1f3;
+  --color-secondary-foreground: #35434d;
+}

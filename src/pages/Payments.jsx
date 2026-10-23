@@ -7,6 +7,9 @@ import { PageState } from "../components/PageState";
 import { EmptyState } from "../components/EmptyState";
 import { StatusBadge } from "../components/StatusBadge";
 import { Pagination } from "../components/Pagination";
+import { Button } from "../components/ui/Button";
+import { SelectField } from "../components/ui/SelectField";
+import { Text } from "../components/ui/Text";
 
 export function Payments() {
   const [rows, setRows] = useState([]),
@@ -48,8 +51,8 @@ export function Payments() {
     <>
       <div className="toolbar">
         <div className="filter-select">
-          <span>Category</span>
-          <select
+          <Text as="span">Category</Text>
+          <SelectField
             value={filter}
             onChange={(e) => {
               setFilter(e.target.value);
@@ -58,14 +61,14 @@ export function Payments() {
           >
             <option value="">All payments</option>
             <option value="appointments">Appointments</option>
-          </select>
+          </SelectField>
         </div>
-        <span className="result-count">
+        <Text as="span" className="result-count">
           {pagination?.total ?? rows.length} payments
-        </span>
-        <button className="btn btn-light" onClick={load}>
+        </Text>
+        <Button variant="secondary" onClick={load}>
           ↻ Refresh
-        </button>
+        </Button>
       </div>
       {toast && <div className="notice success">{toast}</div>}
       {error ? (
@@ -105,22 +108,26 @@ export function Payments() {
                     <td>{dateTime(p.paidAt)}</td>
                     <td>
                       <div className="payment-actions">
-                        <select defaultValue={p.status} id={`status-${p._id}`}>
+                        <SelectField
+                          defaultValue={p.status}
+                          id={`status-${p._id}`}
+                        >
                           <option value="pending">Pending</option>
                           <option value="paid">Paid</option>
                           <option value="failed">Failed</option>
                           <option value="refunded">Refunded</option>
-                        </select>
-                        <select
+                        </SelectField>
+                        <SelectField
                           defaultValue={p.method || "upi"}
                           id={`method-${p._id}`}
                         >
                           <option value="upi">UPI</option>
                           <option value="cash">Cash</option>
                           <option value="card">Card</option>
-                        </select>
-                        <button
-                          className="btn btn-small btn-light"
+                        </SelectField>
+                        <Button
+                          variant="secondary"
+                          size="small"
                           onClick={() =>
                             update(
                               p._id,
@@ -130,7 +137,7 @@ export function Payments() {
                           }
                         >
                           Save
-                        </button>
+                        </Button>
                       </div>
                     </td>
                   </tr>

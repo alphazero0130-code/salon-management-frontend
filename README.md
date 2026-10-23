@@ -35,6 +35,8 @@ A responsive React + Vite admin workspace connected to the provided Express/Mong
 ## API response format
 The frontend keeps presentation pages separate from application API operations (`services/salonApi.js`), HTTP transport (`services/httpClient.js`), and API configuration (`services/apiConfig.js`). The shared API configuration stores the base URL and endpoint paths. Set `VITE_API_BASE_URL` in `.env` to configure the backend host. The HTTP client unwraps the backend's `{ success, message, data }` envelope and surfaces server error messages. Paginated list requests send `page` and `limit` query parameters, show 15 records per page, and read `{ pagination: { page, limit, total, totalPages } }` metadata for page navigation. The dashboard shows up to five appointments and services. The Users screen reads from `GET /api/auth/user`; the Customer API is not used. No API keys or backend environment secrets should be placed in this frontend `.env`.
 
+Reusable presentation controls live in `src/components/ui/` as focused components (buttons, text, and form controls). `src/components/Field.jsx` composes those controls with labels and validation, while application colors are defined in `src/theme/colors.css` and exposed to components through `src/theme/colors.js`. Keep page-specific behavior in `src/pages/` and use these shared controls instead of rendering native controls directly in pages.
+
 ## Notes about existing backend behavior
 - Appointment creation expects `userId` to reference a `User` account (not a `Customer` document), `serviceId`, optional `staffId`, and `appointmentDate`.
 - Creating an appointment also creates a pending payment record on the backend.

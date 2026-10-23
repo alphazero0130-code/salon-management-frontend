@@ -1,7 +1,9 @@
+import { Text } from "./ui/Text";
+
 export function StatusBadge({ status, children = status, className = "" }) {
   return (
-    <span className={`status status-${status} ${className}`.trim()}>
+    <Text as="span" className={`status status-${status} ${className}`.trim()}>
       {children}
-    </span>
+    </Text>
   );
 }

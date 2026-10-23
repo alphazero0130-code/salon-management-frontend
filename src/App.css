@@ -49,12 +49,12 @@ tbody tr:hover{background:#f7faf9}
 .search-box{border-color:#dce3e7;border-radius:7px}
 .search-box:focus-within{border-color:#5caaa0;box-shadow:0 0 0 3px #1482761a}
 .btn{border-radius:7px}
-.btn-primary{background:#167c72;color:#fff}
-.btn-primary:hover{background:#116b62}
-.btn-light{background:#edf1f3;color:#35434d}
-.text-btn{color:#14796f}
-.field input,.field select,.field textarea,.filter-select select,.mini-select{border-color:#dce3e7;border-radius:7px}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:#5caaa0;box-shadow:0 0 0 3px #1482761a}
+.btn-primary{background:var(--color-primary);color:#fff}
+.btn-primary:hover{background:var(--color-primary-hover)}
+.btn-light{background:var(--color-secondary-background);color:var(--color-secondary-foreground)}
+.text-btn{color:var(--color-primary)}
+.field input,.field select,.field textarea,.filter-select select,.mini-select{border-color:var(--color-control-border);border-radius:7px}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--color-focus);box-shadow:0 0 0 3px var(--color-focus-ring)}
 .modal-backdrop{background:#15222bbd}
 .modal-card{border-radius:10px}
 .login-screen{background:#fff}

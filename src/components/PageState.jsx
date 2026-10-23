@@ -1,21 +1,24 @@
 
+import { Button } from "./ui/Button";
+import { Text } from "./ui/Text";
+
 export function PageState({ loading, error, onRetry }) {
   if (loading)
     return (
       <div className="state-card">
         <div className="spinner" />
-        <p>Loading your salon data…</p>
+        <Text as="p">Loading your salon data…</Text>
       </div>
     );
   if (error)
     return (
       <div className="state-card">
         <div className="state-icon">!</div>
-        <h3>Couldn’t load this data</h3>
-        <p>{error}</p>
-        <button className="btn btn-light" onClick={onRetry}>
+        <Text as="h3">Couldn’t load this data</Text>
+        <Text as="p">{error}</Text>
+        <Button variant="secondary" onClick={onRetry}>
           Try again
-        </button>
+        </Button>
       </div>
     );
   return null;

@@ -13,6 +13,9 @@ import { Field } from "../components/Field";
 import { PageState } from "../components/PageState";
 import { Modal } from "../components/Modal";
 import { Pagination } from "../components/Pagination";
+import { Button } from "../components/ui/Button";
+import { SelectField } from "../components/ui/SelectField";
+import { Text } from "../components/ui/Text";
 
 export function Appointments() {
   const [rows, setRows] = useState([]),
@@ -114,8 +117,8 @@ export function Appointments() {
     <>
       <div className="toolbar">
         <div className="filter-select">
-          <span>Status</span>
-          <select
+          <Text as="span">Status</Text>
+          <SelectField
             value={status}
             onChange={(e) => {
               setStatus(e.target.value);
@@ -126,14 +129,13 @@ export function Appointments() {
             <option value="booked">Booked</option>
             <option value="completed">Completed</option>
             <option value="cancelled">Cancelled</option>
-          </select>
+          </SelectField>
         </div>
-        <span className="result-count">
+        <Text as="span" className="result-count">
           {pagination?.total ?? rows.length} bookings
-        </span>
+        </Text>
         {admin && (
-          <button
-            className="btn btn-primary"
+          <Button
             onClick={() => {
               setForm({
                 userId: "",
@@ -146,7 +148,7 @@ export function Appointments() {
             }}
           >
             ＋ New appointment
-          </button>
+          </Button>
         )}
       </div>
       {toast && <div className="notice success">{toast}</div>}
@@ -160,23 +162,23 @@ export function Appointments() {
             appointments={rows}
             onStatus={admin ? changeStatus : null}
           />
-          <div className="table-footer">
+          <Text as="div" className="table-footer">
             Showing {rows.length} appointment{rows.length === 1 ? "" : "s"} ·
             Updates are saved to your backend.
-          </div>
+          </Text>
           {pagination && (
             <Pagination pagination={pagination} onPageChange={setPage} />
           )}
           {admin && (
             <div className="appointment-delete-list">
               {rows.map((a) => (
-                <button
+                <Button
+                  variant="destructive"
                   key={a._id}
-                  className="delete-appointment"
                   onClick={() => remove(a)}
                 >
                   Delete {a.user?.name || "booking"} ×
-                </button>
+                </Button>
               ))}
             </div>
           )}
@@ -239,14 +241,14 @@ export function Appointments() {
                 onChange={(v) => setForm({ ...form, appointmentDate: v })}
                 required
               />
-              <div className="field full-field">
-                <span>Notes</span>
-                <textarea
-                  value={form.notes}
-                  onChange={(e) => setForm({ ...form, notes: e.target.value })}
-                  placeholder="Any preferences or notes for the stylist"
-                />
-              </div>
+              <Field
+                className="full-field"
+                label="Notes"
+                value={form.notes}
+                onChange={(v) => setForm({ ...form, notes: v })}
+                placeholder="Any preferences or notes for the stylist"
+                multiline
+              />
             </div>
             {users.length === 0 && (
               <div className="notice error">
@@ -255,19 +257,19 @@ export function Appointments() {
               </div>
             )}
             <div className="modal-actions">
-              <button
+              <Button
+                variant="secondary"
                 type="button"
-                className="btn btn-light"
                 onClick={() => setModal(false)}
               >
                 Cancel
-              </button>
-              <button
-                className="btn btn-primary"
+              </Button>
+              <Button
+                type="submit"
                 disabled={busy || !users.length}
               >
                 {busy ? "Creating…" : "Create appointment"}
-              </button>
+              </Button>
             </div>
         </Modal>
       )}

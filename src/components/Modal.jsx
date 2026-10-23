@@ -1,4 +1,6 @@
 import { useId } from "react";
+import { Button } from "./ui/Button";
+import { Text } from "./ui/Text";
 
 export function Modal({
   eyebrow,
@@ -23,18 +25,28 @@ export function Modal({
       >
         <div className="modal-heading">
           <div>
-            {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-            <h2 id={titleId}>{title}</h2>
-            {subtitle && <p className={subtitleClassName}>{subtitle}</p>}
+            {eyebrow && (
+              <Text as="p" className="eyebrow">
+                {eyebrow}
+              </Text>
+            )}
+            <Text as="h2" id={titleId}>
+              {title}
+            </Text>
+            {subtitle && (
+              <Text as="p" className={subtitleClassName}>
+                {subtitle}
+              </Text>
+            )}
           </div>
-          <button
+          <Button
+            variant="icon"
             type="button"
-            className="icon-btn"
             aria-label="Close dialog"
             onClick={onClose}
           >
             ✕
-          </button>
+          </Button>
         </div>
         {children}
       </form>

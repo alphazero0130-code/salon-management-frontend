@@ -1,4 +1,6 @@
 import "./Pagination.css";
+import { Button } from "./ui/Button";
+import { Text } from "./ui/Text";
 
 export function Pagination({ pagination, onPageChange }) {
   const { page, limit, total, totalPages } = pagination;
@@ -7,27 +9,29 @@ export function Pagination({ pagination, onPageChange }) {
 
   return (
     <div className="pagination">
-      <span>
+      <Text as="span">
         Showing {firstItem}–{lastItem} of {total}
-      </span>
+      </Text>
       <div className="pagination-actions">
-        <button
-          className="btn btn-small btn-light"
+        <Button
+          variant="secondary"
+          size="small"
           disabled={page <= 1}
           onClick={() => onPageChange(page - 1)}
         >
           Previous
-        </button>
-        <span>
+        </Button>
+        <Text as="span">
           Page {page} of {Math.max(totalPages, 1)}
-        </span>
-        <button
-          className="btn btn-small btn-light"
+        </Text>
+        <Button
+          variant="secondary"
+          size="small"
           disabled={page >= totalPages}
           onClick={() => onPageChange(page + 1)}
         >
           Next
-        </button>
+        </Button>
       </div>
     </div>
   );

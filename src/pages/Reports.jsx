@@ -5,6 +5,8 @@ import { PAGE_SIZE } from "../../services/apiConfig";
 import { getList, money } from "../utils";
 import { PageState } from "../components/PageState";
 import { Pagination } from "../components/Pagination";
+import { Button } from "../components/ui/Button";
+import { Text } from "../components/ui/Text";
 
 export function Reports() {
   const [report, setReport] = useState(null),
@@ -107,18 +109,18 @@ export function Reports() {
                   here.
                 </p>
               </div>
-              <button className="btn btn-light" onClick={load}>
+              <Button variant="secondary" onClick={load}>
                 ↻ Refresh
-              </button>
+              </Button>
             </div>
             <div className="report-note">
               <span>✦</span>
               <div>
-                <strong>Keep your numbers meaningful</strong>
-                <p>
+                <Text as="strong">Keep your numbers meaningful</Text>
+                <Text as="p">
                   The revenue report counts payments marked as paid. Appointment
                   revenue is a separate booking-value metric from your backend.
-                </p>
+                </Text>
               </div>
             </div>
             {byService.length > 0 && (

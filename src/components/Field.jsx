@@ -1,4 +1,9 @@
 
+import { SelectField } from "./ui/SelectField";
+import { Text } from "./ui/Text";
+import { TextAreaField } from "./ui/TextAreaField";
+import { TextField } from "./ui/TextField";
+
 export function Field({
   label,
   value,
@@ -11,15 +16,17 @@ export function Field({
   minLength,
   options,
   disabled = false,
+  multiline = false,
+  className = "",
 }) {
   return (
-    <label className="field">
-      <span>
+    <label className={`field ${className}`.trim()}>
+      <Text as="span">
         {label}
         {required && <i> *</i>}
-      </span>
+      </Text>
       {options ? (
-        <select
+        <SelectField
           value={value ?? ""}
           onChange={(e) => onChange(e.target.value)}
           required={required}
@@ -31,9 +38,18 @@ export function Field({
               {o.label}
             </option>
           ))}
-        </select>
+        </SelectField>
+      ) : multiline ? (
+        <TextAreaField
+          value={value ?? ""}
+          onChange={(e) => onChange(e.target.value)}
+          required={required}
+          placeholder={placeholder}
+          minLength={minLength}
+          disabled={disabled}
+        />
       ) : (
-        <input
+        <TextField
           type={type}
           value={value ?? ""}
           onChange={(e) => onChange(e.target.value)}

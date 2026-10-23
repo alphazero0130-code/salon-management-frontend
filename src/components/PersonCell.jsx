@@ -1,3 +1,5 @@
+import { Text } from "./ui/Text";
+
 export function PersonCell({ name, detail }) {
   const displayName = name || "Unknown user";
 
@@ -7,8 +9,8 @@ export function PersonCell({ name, detail }) {
         {displayName.slice(0, 1).toUpperCase()}
       </span>
       <div>
-        <strong>{displayName}</strong>
-        {detail && <small>{detail}</small>}
+        <Text as="strong">{displayName}</Text>
+        {detail && <Text as="small">{detail}</Text>}
       </div>
     </div>
   );

@@ -9,6 +9,9 @@ import { Modal } from "../components/Modal";
 import { StatusBadge } from "../components/StatusBadge";
 import { PersonCell } from "../components/PersonCell";
 import { Pagination } from "../components/Pagination";
+import { Button } from "../components/ui/Button";
+import { SelectField } from "../components/ui/SelectField";
+import { Text } from "../components/ui/Text";
 
 export function TeamAccess() {
   const [users, setUsers] = useState([]),
@@ -76,12 +79,12 @@ export function TeamAccess() {
         <section className="panel table-panel">
           <div className="panel-heading">
             <div>
-              <h3>Registered accounts</h3>
-              <p>Only promote trusted users to administrator.</p>
+              <Text as="h3">Registered accounts</Text>
+              <Text as="p">Only promote trusted users to administrator.</Text>
             </div>
-            <span className="result-count">
+            <Text as="span" className="result-count">
               {pagination?.total ?? users.length} accounts
-            </span>
+            </Text>
           </div>
           <div className="table-wrap">
             <table>
@@ -105,20 +108,21 @@ export function TeamAccess() {
                     </td>
                     <td>
                       <div className="row-actions">
-                        <select
+                        <SelectField
                           className="mini-select"
                           value={u.role}
                           onChange={(e) => role(u._id, e.target.value)}
                         >
                           <option value="staff">Staff</option>
                           <option value="admin">Admin</option>
-                        </select>
-                        <button
-                          className="btn btn-small btn-light"
+                        </SelectField>
+                        <Button
+                          variant="secondary"
+                          size="small"
                           onClick={() => setPasswordUser(u)}
                         >
                           Reset password
-                        </button>
+                        </Button>
                       </div>
                     </td>
                   </tr>
@@ -158,14 +162,14 @@ export function TeamAccess() {
               }
             />
             <div className="modal-actions">
-              <button
+              <Button
+                variant="secondary"
                 type="button"
-                className="btn btn-light"
                 onClick={() => setPasswordUser(null)}
               >
                 Cancel
-              </button>
-              <button className="btn btn-primary">Update password</button>
+              </Button>
+              <Button type="submit">Update password</Button>
             </div>
         </Modal>
       )}

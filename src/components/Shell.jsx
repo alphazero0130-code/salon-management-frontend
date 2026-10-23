@@ -1,5 +1,7 @@
 import { NavLink, useLocation } from "react-router";
 import { useUser } from "../context/UserContext";
+import { Button } from "./ui/Button";
+import { Text } from "./ui/Text";
 
 export function Shell({ children }) {
   const { user, logout } = useUser();
@@ -30,11 +32,13 @@ export function Shell({ children }) {
         <div className="brand">
           <div className="brand-mark">G</div>
           <div>
-            <strong>glow.</strong>
-            <small>SALON STUDIO</small>
+            <Text as="strong">glow.</Text>
+            <Text as="small">SALON STUDIO</Text>
           </div>
         </div>
-        <div className="workspace-label">WORKSPACE</div>
+        <Text as="div" className="workspace-label">
+          WORKSPACE
+        </Text>
         <nav className="side-nav">
           <NavLink end to="/">
             <span>◫</span> Overview
@@ -53,7 +57,9 @@ export function Shell({ children }) {
               <span>♧</span> Team
             </NavLink>
           )}
-          <div className="workspace-label nav-spacer">BUSINESS</div>
+          <Text as="div" className="workspace-label nav-spacer">
+            BUSINESS
+          </Text>
           <NavLink to="/payments">
             <span>◈</span> Payments
           </NavLink>
@@ -78,36 +84,40 @@ export function Shell({ children }) {
             Workspace <span>/</span> <b>{current[0]}</b>
           </div>
           <div className="top-actions">
-            <span className="today-label">
+            <Text as="span" className="today-label">
               {new Date().toLocaleDateString("en-IN", {
                 weekday: "short",
                 day: "numeric",
                 month: "short",
               })}
-            </span>
+            </Text>
             <div className="avatar">
               {(user?.name || "A").slice(0, 1).toUpperCase()}
             </div>
             <div className="user-info">
-              <strong>{user?.name || "Salon admin"}</strong>
-              <small>{user?.role || "staff"}</small>
+              <Text as="strong">{user?.name || "Salon admin"}</Text>
+              <Text as="small">{user?.role || "staff"}</Text>
             </div>
-            <button className="logout-btn" onClick={logout}>
+            <Button variant="logout" onClick={logout}>
               Log out ↗
-            </button>
+            </Button>
           </div>
         </header>
         <section className="page-content">
           <div className="page-heading">
             <div>
-              <p className="eyebrow">GLOW SALON / MANAGEMENT</p>
-              <h1>{current[0]}</h1>
-              <p>{current[1]}</p>
+              <Text as="p" className="eyebrow">
+                GLOW SALON / MANAGEMENT
+              </Text>
+              <Text as="h1">{current[0]}</Text>
+              <Text as="p">{current[1]}</Text>
             </div>
             {location.pathname !== "/team-access" &&
               location.pathname !== "/reports" &&
               location.pathname !== "/payments" && (
-                <span className="date-chip">✦ &nbsp; Your salon, in sync</span>
+                <Text as="span" className="date-chip">
+                  ✦ &nbsp; Your salon, in sync
+                </Text>
               )}
           </div>
           {children}
