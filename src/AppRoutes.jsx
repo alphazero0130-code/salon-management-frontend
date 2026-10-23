@@ -1,34 +1,96 @@
-import Dashboard from "./pages/Dashboard";
-import Customers from "./pages/Customers";
-import Services from "./pages/Services";
-import Appointments from "./pages/Appointments";
-import { BrowserRouter, Link, Route, Routes } from "react-router";
-import Login from "./pages/Login";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router";
 import "./App.css";
+import { Protected } from "./components/Protected";
+import { Appointments } from "./pages/Appointments";
+import { Dashboard } from "./pages/Dashboard";
+import { Login } from "./pages/Login";
+import { Payments } from "./pages/Payments";
+import { Reports } from "./pages/Reports";
+import { ResourcePage } from "./pages/ResourcePage";
+import { TeamAccess } from "./pages/TeamAccess";
 
-function AppRoutes() {
+function AppRoutesInner() {
   return (
-    <BrowserRouter>
-      {/* BrowserRouter enables browser-based routing. */}
-      <nav>
-        {/* Links let users navigate without a full-page reload. */}
-        <Link to="/">Dashboard</Link>{" | "}
-        <Link to="/customers">Customers</Link>{" | "}
-        <Link to="/services">Services</Link>{" | "}
-        <Link to="/appointments">Appointments</Link> {" | "}
-        <Link to="/login">Login</Link>
-      </nav>
-
-      {/* Routes maps each URL path to the component that should render. */}
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/customers" element={<Customers />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/appointments" element={<Appointments />} />
-        <Route path="/login" element={<Login/>}/>
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route
+        path="/"
+        element={
+          <Protected admin>
+            <Dashboard />
+          </Protected>
+        }
+      />
+      <Route
+        path="/customers"
+        element={
+          <Protected>
+            <ResourcePage kind="customers" />
+          </Protected>
+        }
+      />
+      <Route
+        path="/services"
+        element={
+          <Protected>
+            <ResourcePage kind="services" />
+          </Protected>
+        }
+      />
+      <Route
+        path="/appointments"
+        element={
+          <Protected>
+            <Appointments />
+          </Protected>
+        }
+      />
+      <Route
+        path="/staff"
+        element={
+          <Protected admin>
+            <ResourcePage kind="staff" />
+          </Protected>
+        }
+      />
+      <Route
+        path="/payments"
+        element={
+          <Protected admin>
+            <Payments />
+          </Protected>
+        }
+      />
+      <Route
+        path="/reports"
+        element={
+          <Protected admin>
+            <Reports />
+          </Protected>
+        }
+      />
+      <Route
+        path="/team-access"
+        element={
+          <Protected admin>
+            <TeamAccess />
+          </Protected>
+        }
+      />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
 
-export default AppRoutes;
+export default function AppRoutes() {
+  return (
+    <BrowserRouter>
+      <AppRoutesInner />
+    </BrowserRouter>
+  );
+}
