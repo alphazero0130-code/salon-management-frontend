@@ -43,3 +43,6 @@ Reusable presentation controls live in `src/components/ui/` as focused component
 - Your backend appointment filter currently accepts `booked`, `completed`, and `cancelled` only; pending appointments appear under “All appointments”.
 - The backend currently exposes staff availability as a field but its PATCH controller only allows name/email/jobTitle updates. The UI therefore displays availability without pretending it can change it.
 - The service-by-revenue report returns service ObjectIds rather than populated service names, so that report is labelled by service ID.
+
+
+https://salon-management-frontend-ruby.vercel.app/login
