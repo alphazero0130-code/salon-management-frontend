@@ -1,7 +1,11 @@
-export const API_BASE_URL = (
+const configuredApiBaseUrl =
   import.meta.env.VITE_API_BASE_URL ||
-  "https://salon-management-backend-1t3o.onrender.com/api"
-).replace(/\/$/, "");
+  "https://salon-management-backend-1t3o.onrender.com/api";
+const normalizedApiBaseUrl = configuredApiBaseUrl.trim().replace(/\/+$/, "");
+
+export const API_BASE_URL = /\/api$/i.test(normalizedApiBaseUrl)
+  ? normalizedApiBaseUrl
+  : `${normalizedApiBaseUrl}/api`;
 export const PAGE_SIZE = 15;
 
 export const API_ENDPOINTS = Object.freeze({

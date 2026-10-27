@@ -21,7 +21,7 @@ A responsive React + Vite admin workspace connected to the provided Express/Mong
 ## Run locally
 1. Open this folder in VS Code.
 2. Install dependencies: `npm install`
-3. Copy `.env.example` to `.env` if needed. `VITE_API_BASE_URL` should include the `/api` path (for example, `http://localhost:3000/api`). The deployed backend URL is used when this variable is unset.
+3. Copy `.env.example` to `.env` if needed. `VITE_API_BASE_URL` can be the backend origin or include the `/api` path (for example, `http://localhost:3000` or `http://localhost:3000/api`). The deployed backend URL is used when this variable is unset.
 4. Start the backend in a separate terminal.
 5. Start frontend: `npm run dev`
 6. Open the URL Vite prints (normally `http://localhost:5173`).
@@ -33,7 +33,7 @@ A responsive React + Vite admin workspace connected to the provided Express/Mong
 - Admins get the dashboard, team management, payments, reports, and account access. Staff can access appointments, customers and services according to backend permissions.
 
 ## API response format
-The frontend keeps presentation pages separate from application API operations (`services/salonApi.js`), HTTP transport (`services/httpClient.js`), and API configuration (`services/apiConfig.js`). The shared API configuration stores the `/api` base URL and endpoint paths relative to it. Set `VITE_API_BASE_URL` in `.env` to configure a different backend. The HTTP client unwraps the backend's `{ success, message, data }` envelope and surfaces server error messages. Paginated list requests send `page` and `limit` query parameters, show 15 records per page, and read `{ pagination: { page, limit, total, totalPages } }` metadata for page navigation. The dashboard shows up to five appointments and services. The Users screen reads from `GET /api/auth/user`; the Customer API is not used. No API keys or backend environment secrets should be placed in this frontend `.env`.
+The frontend keeps presentation pages separate from application API operations (`services/salonApi.js`), HTTP transport (`services/httpClient.js`), and API configuration (`services/apiConfig.js`). The shared API configuration stores the `/api` base URL and endpoint paths relative to it. Set `VITE_API_BASE_URL` in `.env` to configure a different backend; a missing `/api` suffix is added automatically. In Vercel, set `VITE_API_BASE_URL` to `https://salon-management-backend-1t3o.onrender.com` (or the same URL with `/api`) for the Production environment, then redeploy so Vite includes the value in the built frontend. The HTTP client unwraps the backend's `{ success, message, data }` envelope and surfaces server error messages. Paginated list requests send `page` and `limit` query parameters, show 15 records per page, and read `{ pagination: { page, limit, total, totalPages } }` metadata for page navigation. The dashboard shows up to five appointments and services. The Users screen reads from `GET /api/auth/user`; the Customer API is not used. No API keys or backend environment secrets should be placed in this frontend `.env`.
 
 Reusable presentation controls live in `src/components/ui/` as focused components (buttons, text, and form controls). `src/components/Field.jsx` composes those controls with labels and validation, while application colors are defined in `src/theme/colors.css` and exposed to components through `src/theme/colors.js`. Keep page-specific behavior in `src/pages/` and use these shared controls instead of rendering native controls directly in pages.
 
